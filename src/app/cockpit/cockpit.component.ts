@@ -11,7 +11,7 @@ import {
   styleUrls: ['./cockpit.component.css'],
 })
 export class CockpitComponent implements OnInit {
-  newServerName = '';
+  // newServerName = '';
   newServerContent = '';
 
   @Output() serverCreated = new EventEmitter();
@@ -21,18 +21,18 @@ export class CockpitComponent implements OnInit {
 
   ngOnInit() {}
 
-  onAddServer() {
+  onAddServer(nameInput: HTMLInputElement) {
     this.serverCreated.emit({
       type: 'server',
-      name: this.newServerName,
+      name: nameInput.value,
       content: this.newServerContent,
     });
   }
 
-  onAddBlueprint() {
+  onAddBlueprint(nameInput: HTMLInputElement) {
     this.bluePrintCreated.emit({
       type: 'blueprint',
-      name: this.newServerName,
+      name: nameInput.value,
       content: this.newServerContent,
     });
   }
