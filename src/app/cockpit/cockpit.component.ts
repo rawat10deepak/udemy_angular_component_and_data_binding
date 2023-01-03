@@ -1,8 +1,10 @@
 import {
   Component,
+  ElementRef,
   EventEmitter,
   OnInit,
   Output,
+  ViewChild,
 } from '@angular/core';
 
 @Component({
@@ -12,7 +14,9 @@ import {
 })
 export class CockpitComponent implements OnInit {
   // newServerName = '';
-  newServerContent = '';
+  // newServerContent = '';
+  @ViewChild('serverContentInput', { static: true })
+  serverContentInput: ElementRef;
 
   @Output() serverCreated = new EventEmitter();
   @Output('bp') bluePrintCreated = new EventEmitter();
@@ -25,7 +29,7 @@ export class CockpitComponent implements OnInit {
     this.serverCreated.emit({
       type: 'server',
       name: nameInput.value,
-      content: this.newServerContent,
+      content: this.serverContentInput.nativeElement.value,
     });
   }
 
@@ -33,7 +37,7 @@ export class CockpitComponent implements OnInit {
     this.bluePrintCreated.emit({
       type: 'blueprint',
       name: nameInput.value,
-      content: this.newServerContent,
+      content: this.serverContentInput.nativeElement.value,
     });
   }
 }
